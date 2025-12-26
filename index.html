@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MTN MoMo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style/main.css">
+</head>
+<body>
+  <div class="container" id="mainContainer">
+    <div class="sidebar" id="sidebarPanel">
+      <div class="brand-logo" id="brandLogo">
+        <div class="brand-icon" id="brandIcon"></div>
+        <div>
+          <div>We don’t just connect people</div>
+          <div>we create possibilities.</div>
+        </div>
+      </div>
+      <p class="subtitle" id="pageSubtitle"></p>
+      <div class="progress-container">
+        <div class="progress-track" id="progressTrack">
+          <div class="progress-indicator" id="progressIndicator"></div>
+        </div>
+        <div class="progress-label" id="progressLabel">0%</div>
+      </div>
+      <div class="actions">
+        <button class="action-btn" id="resetBtn">Restart</button>
+        <div style="flex:1"></div>
+        <button class="action-btn" id="supportBtn">Need help?</button>
+      </div>
+      <div class="banner">
+        <h1 id="mainTitle"><span style="color: red;">*</span>It’s always winning time with MTN MoMo !<span style="color: red;">*</span></h1>
+      </div>
+    </div>
+    <div class="content-area" id="contentPanel">
+      <div class="glow-effect"></div>
+      <div class="form-card" id="formCard">
+        <div id="quizArea">
+          <div class="quiz-step active" id="step1" data-index="1">
+            <div class="step-header">
+              <div class="step-number">Question 1</div>
+            </div>
+            <div class="step-question">Have you ever won with MTN MoMo ?</div>
+            <div class="options">
+              <button class="option-btn" data-target="step2">Yes</button>
+              <button class="option-btn" data-target="step2">No</button>
+            </div>
+          </div>
+          <div class="quiz-step" id="step2" data-index="2">
+            <div class="step-header">
+              <div class="step-number">Question 2</div>
+            </div>
+            <div class="step-question">Are you from South Africa?</div>
+            <div class="options">
+              <button class="option-btn" data-target="step3">Yes</button>
+              <button class="option-btn" data-target="step3">No</button>
+            </div>
+          </div>
+          <div class="quiz-step" id="step3" data-index="3">
+            <div class="step-header">
+              <div class="step-number">Question 3</div>
+            </div>
+            <div class="step-question">Where is the main branch of MTN located in South Africa?</div>
+            <div class="options">
+              <button class="option-btn" data-target="complete">Cape Town</button>
+              <button class="option-btn" data-target="complete">Johannesburg</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-text">Each answer brings you one level closer. You will move on after the last question.</div>
+        <div class="card-footer">
+          <div>YourBrand</div>
+          <div>• Interactive Funnel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./assets/script/app.js"></script>
+</body>
+</html>
