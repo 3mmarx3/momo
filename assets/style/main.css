@@ -223,6 +223,13 @@ h1 {
   box-shadow: 0 14px 30px rgba(255, 107, 107, 0.12);
 }
 
+
+.option-btn:hover {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  color: white;
+  box-shadow: 0 14px 30px rgba(255, 107, 107, 0.12);
+}
+
 .option-btn.selected {
   background: linear-gradient(90deg, var(--accent1), var(--accent2));
   color: white;
