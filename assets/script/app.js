@@ -1,53 +1,46 @@
-const questions = Array.from(document.querySelectorAll('.question-item'));
-const progressFill = document.querySelector('.progress-fill');
-const progressPercent = document.querySelector('.progress-percent');
-const restartButton = document.getElementById('restart-button');
-const helpButton = document.getElementById('help-button');
-let current = 0;
 
-function updateProgress() {
-  const percent = Math.round((current / (questions.length - 1)) * 100);
-  progressFill.style.width = percent + '%';
-  progressPercent.textContent = percent + '%';
-}
+    const steps = document.querySelectorAll('.quiz-step');
+    const progressIndicator = document.getElementById('progressIndicator');
+    const progressLabel = document.getElementById('progressLabel');
+    const resetBtn = document.getElementById('resetBtn');
+    const supportBtn = document.getElementById('supportBtn');
 
-function showQuestion(index) {
-  questions.forEach((q, i) => {
-    q.classList.toggle('active', i === index);
-  });
-  current = index;
-  updateProgress();
-}
+    let currentIndex = 0;
 
-function handleAnswer(e) {
-  const button = e.target;
-  const parent = button.closest('.question-item');
-  parent.querySelectorAll('.answer-button').forEach(b => b.classList.remove('selected'));
-  button.classList.add('selected');
-  const next = button.getAttribute('data-next');
-  if (next === 'finish') {
-    window.location.href = 'https://www.google.com';
-  } else {
-    const nextIndex = questions.findIndex(q => q.id === next);
-    if (nextIndex >= 0) showQuestion(nextIndex);
-  }
-}
+    function updateProgress() {
+      const totalSteps = steps.length;
+      const percent = Math.round(((currentIndex + 1) / totalSteps) * 100);
+      progressIndicator.style.width = percent + '%';
+      progressLabel.textContent = percent + '%';
+    }
 
-questions.forEach(q => {
-  q.querySelectorAll('.answer-button').forEach(btn => {
-    btn.addEventListener('click', handleAnswer);
-  });
-});
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.classList.toggle('active', i === index);
+      });
+      currentIndex = index;
+      updateProgress();
+    }
 
-restartButton.addEventListener('click', () => {
-  questions.forEach(q => {
-    q.querySelectorAll('.answer-button').forEach(b => b.classList.remove('selected'));
-  });
-  showQuestion(0);
-});
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        if (target === 'complete') {
+          window.location.href = 'https://www.google.com';
+        } else {
+          const nextStep = document.getElementById(target);
+          const nextIndex = parseInt(nextStep.getAttribute('data-index')) - 1;
+          showStep(nextIndex);
+        }
+      });
+    });
 
-helpButton.addEventListener('click', () => {
-  alert('Contact us for any assistance.');
-});
+    resetBtn.addEventListener('click', () => {
+      showStep(0);
+    });
 
-showQuestion(0);
+    supportBtn.addEventListener('click', () => {
+      alert('Contact support for assistance.');
+    });
+
+    updateProgress();
