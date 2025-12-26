@@ -1,46 +1,16 @@
+const steps=document.querySelectorAll('.quiz-step');
+const bar=document.getElementById('progressIndicator');
+const lbl=document.getElementById('progressLabel');
 
-    const steps = document.querySelectorAll('.quiz-step');
-    const progressIndicator = document.getElementById('progressIndicator');
-    const progressLabel = document.getElementById('progressLabel');
-    const resetBtn = document.getElementById('resetBtn');
-    const supportBtn = document.getElementById('supportBtn');
+let i=0;
 
-    let currentIndex = 0;
+const upd=()=>{const p=Math.round((i+1)/steps.length*100);bar.style.width=p+'%';lbl.textContent=p+'%'};
 
-    function updateProgress() {
-      const totalSteps = steps.length;
-      const percent = Math.round(((currentIndex + 1) / totalSteps) * 100);
-      progressIndicator.style.width = percent + '%';
-      progressLabel.textContent = percent + '%';
-    }
+const go=n=>{steps.forEach((s,x)=>s.classList.toggle('active',x===n));i=n;upd()};
 
-    function showStep(index) {
-      steps.forEach((step, i) => {
-        step.classList.toggle('active', i === index);
-      });
-      currentIndex = index;
-      updateProgress();
-    }
+document.querySelectorAll('.option-btn').forEach(b=>b.onclick=_=>{const t=b.dataset.target;t==='complete'?location.href='https://www.google.com':go(document.getElementById(t).dataset.index-1)});
 
-    document.querySelectorAll('.option-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.getAttribute('data-target');
-        if (target === 'complete') {
-          window.location.href = 'https://www.google.com';
-        } else {
-          const nextStep = document.getElementById(target);
-          const nextIndex = parseInt(nextStep.getAttribute('data-index')) - 1;
-          showStep(nextIndex);
-        }
-      });
-    });
+document.getElementById('resetBtn').onclick=_=>go(0);
+document.getElementById('supportBtn').onclick=_=>alert('Contact support for assistance.');
 
-    resetBtn.addEventListener('click', () => {
-      showStep(0);
-    });
-
-    supportBtn.addEventListener('click', () => {
-      alert('Contact support for assistance.');
-    });
-
-    updateProgress();
+upd();
